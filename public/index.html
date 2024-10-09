@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frutas y Verduras del Éxito</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/x-icon" href=".//pikaso-image-undefined.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .product-card {
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 10px;
+            width: 45%;
+        }
+        .product-name {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .product-price {
+            color: green;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div class="container p-4">
+        <h1 class="text-4xl text-center mb-4 font-bold">Frutas y Verduras del Éxito</h1>
+        <div id="product-list" class="product-list"></div>
+    </div>
+
+    <script>
+        // Función para obtener los productos del servidor
+        async function fetchProducts() {
+    try {
+        // Asegúrate de que la URL sea correcta
+        const response = await fetch('http://localhost:3000/api/products');
+        const products = await response.json();
+
+        const productList = document.getElementById('product-list');
+        productList.innerHTML = ''; // Limpiar cualquier producto anterior
+
+        products.forEach(product => {
+            const productCard = document.createElement('div');
+            productCard.classList.add('product-card');
+
+            const productName = document.createElement('div');
+            productName.classList.add('product-name');
+            productName.textContent = product.name;
+
+            const productPrice = document.createElement('div');
+            productPrice.classList.add('product-price');
+            productPrice.textContent = product.price;
+
+            productCard.appendChild(productName);
+            productCard.appendChild(productPrice);
+            productList.appendChild(productCard);
+        });
+    } catch (error) {
+        console.error('Error al obtener los productos:', error);
+    }
+}
+
+
+        // Llamar a la función para cargar los productos al cargar la página
+        window.onload = fetchProducts;
+    </script>
+
+</body>
+</html>

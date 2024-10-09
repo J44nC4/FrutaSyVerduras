@@ -1,0 +1,32 @@
+Crea una aplicación web simple que Muestre los datos de la sección frutas y verduras de la página del éxito. 
+La aplicación debe:
+
+
+1. Crear un listado en una primera columna ordenada Alpha béticamente, de todos los productos de la sección "frutas y verduras" de la página del éxito "https://www.exito.com/mercado/frutas-y-verduras"
+
+2. Frente a cada producto escribe lo equivalente a (Und a $ ) o (Gr a $ ), poniendo el valor de $ correspondiente a cada producto.
+
+3. Permitir al usuario que cada ves que se actualize o se abra el HTML, aparezca el valor de $ correspondiente a cada producto Actualizado.
+
+
+1. Copiar los productos que aparecen en la sección "frutas y verduras" de esta pagina "https://www.exito.com/mercado/frutas-y-verduras", recorrer las paginas de la 1 a la 12.
+
+2. Pegar en una lista alfabéticamente, los productos copiados.
+
+2.Frente a cada producto asígnale el valor correspondiente a la 
+//
+class"product-unit_price-unit__text__qeheS"
+//
+
+4. Crea un diseño responsivo y simple 
+
+5. Incluir todo el código HTML, CSS y JavaScript en un solo archivo.
+
+6. Cargar Tailwind CSS desde un CDN.
+
+Genera el código completo y asegúrate de que se pueda ejecutar haciendo
+doble clic en el archivo HTML resultante.
+
+ahora tengo estos errores , podrias solucionarlos . 
+
+file:///C:/Users/USUARIO/Desktop/2024/GRAPHIC%20MARKET/PromptEngineering/public/index.html

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frutas y Verduras - Éxito</title>
+    <!-- Cargar Tailwind CSS desde un CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Estilos personalizados para la página */
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+        .loading {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 1.5rem;
+            color: #4A5568;
+        }
+        .product-list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div class="container mx-auto p-4">
+        <h1 class="text-4xl font-bold text-center mb-8 text-gray-800">Frutas y Verduras del Éxito</h1>
+        <div id="loading" class="loading">Cargando productos...</div>
+        <div id="product-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 product-list"></div>
+    </div>
+
+    <script>
+        // Función para obtener los productos de frutas y verduras desde la página del Éxito usando un proxy para evitar CORS
+        async function fetchProductos() {
+            try {
+                // Usar el proxy 'cors-anywhere' para evitar el bloqueo de CORS
+                const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+                const targetUrl = 'https://www.exito.com/mercado/frutas-y-verduras';
+                
+                const response = await fetch(proxyUrl + targetUrl);
+                const text = await response.text();
+                
+                // Crear un DOMParser para analizar la respuesta de la página
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(text, 'text/html');
+                
+                // Extraer los productos
+                const productos = [...doc.querySelectorAll('.product-item__name')].map(producto => ({
+                    nombre: producto.innerText.trim(),
+                    precio: producto.parentElement.querySelector('.product-prices__value').innerText.trim()
+                }));
+
+                // Ordenar productos alfabéticamente
+                productos.sort((a, b) => a.nombre.localeCompare(b.nombre));
+
+                // Llamar a la función para mostrar los productos en la página
+                mostrarProductos(productos);
+            } catch (error) {
+                document.getElementById('loading').innerText = 'Error al cargar los productos.';
+            }
+        }
+
+        // Función para mostrar los productos en la página
+        function mostrarProductos(productos) {
+            const productList = document.getElementById('product-list');
+            document.getElementById('loading').style.display = 'none';
+            
+            productos.forEach(producto => {
+                const productDiv = document.createElement('div');
+                productDiv.className = 'bg-white p-4 rounded-lg shadow-md text-center';
+                
+                productDiv.innerHTML = `
+                    <h2 class="text-xl font-semibold text-gray-700 mb-2">${producto.nombre}</h2>
+                    <p class="text-lg text-green-600 font-bold">${producto.precio}</p>
+                `;
+                productList.appendChild(productDiv);
+            });
+        }
+
+        // Ejecutar la función al cargar la página
+        window.onload = fetchProductos;
+    </script>
+
+</body>
+</html>

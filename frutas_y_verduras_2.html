@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frutas y Verduras del Éxito</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .product-card {
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 10px;
+            width: 45%;
+        }
+        .product-name {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .product-price {
+            color: green;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div class="container p-4">
+        <h1 class="text-4xl text-center mb-4 font-bold">Frutas y Verduras del Éxito</h1>
+        <div id="product-list" class="product-list"></div>
+    </div>
+
+    <script>
+        // Simulación de los productos obtenidos desde la página del Éxito
+        const products = [
+            { name: 'Aguacate Hass', price: '$8.500' },
+            { name: 'Banano', price: '$1.200' },
+            { name: 'Cebolla Cabeza Blanca', price: '$3.100' },
+            { name: 'Limón Tahití', price: '$4.900' },
+            { name: 'Manzana Roja', price: '$2.900' },
+            { name: 'Papa Criolla', price: '$1.800' },
+            { name: 'Pera Importada', price: '$7.500' },
+            { name: 'Tomate Chonto', price: '$2.500' },
+        ];
+
+        // Ordenar alfabéticamente los productos por nombre
+        products.sort((a, b) => a.name.localeCompare(b.name));
+
+        // Insertar los productos en la página
+        const productList = document.getElementById('product-list');
+        products.forEach(product => {
+            const productCard = document.createElement('div');
+            productCard.classList.add('product-card', 'shadow-md', 'hover:shadow-lg', 'transition-shadow', 'duration-300', 'ease-in-out');
+
+            const productName = document.createElement('div');
+            productName.classList.add('product-name');
+            productName.textContent = product.name;
+
+            const productPrice = document.createElement('div');
+            productPrice.classList.add('product-price');
+            productPrice.textContent = product.price;
+
+            productCard.appendChild(productName);
+            productCard.appendChild(productPrice);
+            productList.appendChild(productCard);
+        });
+    </script>
+
+</body>
+</html>
